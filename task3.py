@@ -40,11 +40,11 @@ def dijkstra(graph, start):
         if distances[current_vertex] == float('infinity'):
             break
 
-        for neighbor, weight in graph[current_vertex].items():
-            distance = distances[current_vertex] + weight
+        for neighbor_loop, weight_loop in graph[current_vertex].items():
+            distance = distances[current_vertex] + weight_loop
 
-            if distance < distances[neighbor]:
-                distances[neighbor] = distance
+            if distance < distances[neighbor_loop]:
+                distances[neighbor_loop] = distance
         unvisited.remove(current_vertex)
 
     return distances
