@@ -28,3 +28,34 @@ path = nx.dijkstra_path(G, start, finish)
 length = nx.dijkstra_path_length(G, start, finish)
 
 print(f"Оптимальний шлях ({length}):\n {" -> ".join(path)}")
+
+def dijkstra(graph, start):
+    distances = {vertex: float('infinity') for vertex in graph}
+    distances[start] = 0
+    unvisited = list(graph.keys())
+
+    while unvisited:
+        current_vertex = min(unvisited, key=lambda vertex: distances[vertex])
+
+        if distances[current_vertex] == float('infinity'):
+            break
+
+        for neighbor, weight in graph[current_vertex].items():
+            distance = distances[current_vertex] + weight
+
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+        unvisited.remove(current_vertex)
+
+    return distances
+
+graf_as_dictionary = {}
+for node in G.nodes:
+    neighbors = G[node]  # Получаем соседей узла
+    for neighbor, attributes in neighbors.items():
+        weight = attributes['weight']  # Извлекаем вес ребра
+        if node not in a:
+            graf_as_dictionary[node] = {}
+
+        graf_as_dictionary[node][neighbor] = weight
+print(dijkstra(graf_as_dictionary, 'Київ'))
